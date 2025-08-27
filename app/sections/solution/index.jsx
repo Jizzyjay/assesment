@@ -8,7 +8,7 @@ import bg from "../../assets/bg.svg";
 
 const index = () => {
   return (
-    <div className="bg-white min-h-screen overflow-hidden py-6 px-6 md:px-[30px] lg:px-[60px] xl:px-[90px] ">
+    <div className="bg-white min-h-screen overflow-hidden py-6 px-6 md:px-[30px] lg:px-[60px] xl:px-[90px]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8 md:mb-16">
           <h1 className="text-[32px] font-bold text-black mb-4">
