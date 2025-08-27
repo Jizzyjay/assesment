@@ -7,7 +7,7 @@ import hand from "../../assets/hand.svg";
 
 const index = () => {
   return (
-    <div className="bg-[#CDBEBA] px-[74px] flex flex-col md:flex-row items-center justify-center">
+    <div className="bg-[#CDBEBA] px-6 md:px-[30px] lg:px-[60px] xl:px-[90px] flex flex-col md:flex-row items-center justify-center">
       <div className="max-w-[400px] xl:max-w-[480px] py-[32px] flex flex-col gap-6">
         <h3 className="text-[30px] lg:text-[40px] text-black font-bold">
           Ready to Transform Your Event Experience?
