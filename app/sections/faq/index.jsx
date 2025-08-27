@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import open from "../../assets/open.svg";
 import cancel from "../../assets/cancel.svg";
 import Image from "next/image";
 
-const Index = () => {
-  const [openItems, setOpenItems] = useState(new Set());
+const FAQ = () => {
+  const [openItems, setOpenItems] = useState(null);
 
   const faqData = [
     {
@@ -35,49 +35,41 @@ const Index = () => {
     },
   ];
 
-  const toggleItem = (id) => {
-    const newOpenItems = new Set(openItems);
-    if (newOpenItems.has(id)) {
-      newOpenItems.delete(id);
-    } else {
-      newOpenItems.add(id);
-    }
-    setOpenItems(newOpenItems);
+  const toggleItem = (index) => {
+    setOpenItems(openItems === index ? -1 : index);
   };
 
   return (
-    <div className="bg-white max-w-4xl mx-auto px-6 md:px-8 lg:px-0 pt-8 pb-10">
-      {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Frequently Asked Questions
-        </h1>
-        <p className="text-lg text-gray-600">
-          Get answers to common questions about Ajara event marketplace.
-        </p>
-      </div>
+    <div className="bg-white py-16 px-6">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-[32px] font-bold text-gray-900 mb-4">
+            Frequently Asked Questions
+          </h1>
+          <p className="text-gray-600 text-lg">
+            Get answers to common questions about Ajarra event maarket place.
+          </p>
+        </div>
 
-      {/* FAQ Items */}
-      <div className="space-y-4">
-        {faqData.map((item) => {
-          const isOpen = openItems.has(item.id);
-
-          return (
+        <div className="space-y-4">
+          {faqData.map((faq, index) => (
             <div
-              key={item.id}
-              className={`bg-[#F3E9E2] transition-[border-radius] duration-500 overflow-hidden
-              ${isOpen ? "rounded-lg" : "rounded-full"}`}
+              key={index}
+              className={`bg-[#F3E9E2] overflow-hidden ${
+                openItems === index
+                  ? "bg-[#FBF8F6] rounded-lg"
+                  : "bg-[#F3E9E2] rounded-full"
+              }`}
             >
               <button
-                onClick={() => toggleItem(item.id)}
-                className="w-full px-6 py-3 text-left flex justify-between items-center cursor-pointer"
-                aria-expanded={isOpen}
+                onClick={() => toggleItem(index)}
+                className="w-full flex items-center justify-between cursor-pointer py-6 px-8 text-left group transition-colors duration-200"
               >
-                <p className="text-[18px] md:text-[20px] lg:text-[22px] xl:text-[24px] font-semibold text-[#424142] pr-2">
-                  {item.question}
+                <p className="text-[20px] md:text-[24px] font-mulish-sans font-semibold text-[#424142] pr-4">
+                  {faq.question}
                 </p>
                 <div className="flex-shrink-0">
-                  {isOpen ? (
+                  {openItems === index ? (
                     <Image
                       src={cancel}
                       alt="close"
@@ -97,19 +89,28 @@ const Index = () => {
                 </div>
               </button>
 
-              {isOpen && (
-                <div className="px-6 pb-4">
-                    <p className="text-[#424142] text-base font-[300] leading-relaxed">
-                      {item.answer}
-                    </p>
+              <div
+                className={`ease-in ${
+                  openItems === index
+                    ? "max-h-96 opacity-100"
+                    : "max-h-0 opacity-0"
+                }`}
+                style={{
+                  overflow: "hidden",
+                }}
+              >
+                <div className="px-8 pb-6">
+                  <p className="text-base font-light text-[#424142] leading-relaxed">
+                    {faq.answer}
+                  </p>
                 </div>
-              )}
+              </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-export default Index;
+export default FAQ;
